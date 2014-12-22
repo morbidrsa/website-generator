@@ -1,0 +1,10 @@
+* Static Website Template System
+** Static layout
+*** Static layout.html
+*** Static .css files
+*** Static .js files
+** Content .html files
+** Replace content in layout.html with content from the various content files
+** Optionally auto-generate navbar entries
+** Optionally generate szb entries for navbar
+** Replace via RegEx groups and special annotations
