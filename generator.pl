@@ -55,6 +55,15 @@ sub process_content {
     }
 }
 
+sub usage {
+    print "$0 <layout> <content> <output>\n";
+    print "\t--layout-html <layout>\n";
+    print "\t--content-dir <content>\n";
+    print "\t--output-dir <output>\n";
+
+    exit(1);
+}
+
 my $layout_html = '';
 my $content_dir = '';
 my $output_dir = '';
@@ -63,8 +72,9 @@ GetOptions('layout-html=s' => \$layout_html,
 	   'content-dir=s' => \$content_dir,
 	   'output-dir=s' => \$output_dir);
 
-die("Need a layout") if $layout_html eq '';
-die("Need a content directory") if $content_dir eq '';
-die("Need an output directory") if $output_dir eq '';
+usage() if $layout_html eq '';
+usage() if $content_dir eq '';
+usage() if $output_dir eq '';
+
 
 process_content($content_dir, $output_dir, $layout_html);
