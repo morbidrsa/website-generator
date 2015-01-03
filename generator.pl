@@ -51,9 +51,8 @@ sub process_content {
     foreach $content_file (@content_files) {
 	next if $content_file eq ".." || $content_file eq ".";
 
-	print "\$content_file = $content_file\n";
+	print "Processing $content_file\n";
 	process_file($layout_html, $content_dir, $output_dir, $content_file);
-	print "\n\n";
     }
 }
 
