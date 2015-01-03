@@ -34,10 +34,12 @@ sub process_file {
 }
 
 sub process_content {
-    my $content_dir = shift;
-    my $output_dir = shift;
-    my $layout_html = shift;
 
+    my (%options) = @_;
+
+    my $content_dir = $options{content_dir};
+    my $output_dir = $options{output_dir};
+    my $layout_html = $options{layout_html};
     my $content_file;
     my @content_files;
 
@@ -67,6 +69,7 @@ sub usage {
 my $layout_html = '';
 my $content_dir = '';
 my $output_dir = '';
+my %options;
 
 GetOptions('layout-html=s' => \$layout_html,
 	   'content-dir=s' => \$content_dir,
@@ -76,5 +79,8 @@ usage() if $layout_html eq '';
 usage() if $content_dir eq '';
 usage() if $output_dir eq '';
 
+$options{'layout_html'} = $layout_html;
+$options{'output_dir'} = $output_dir;
+$options{'content_dir'} = $content_dir;
 
-process_content($content_dir, $output_dir, $layout_html);
+process_content(%options);
