@@ -73,8 +73,6 @@ sub process_content {
     $navigation .= "</ul>\n";
     close($sitemap);
 
-    print $navigation;
-
     foreach $content_file (@content_files) {
 	next if $content_file eq ".." || $content_file eq ".";
 
