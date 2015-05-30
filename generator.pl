@@ -5,7 +5,8 @@ use strict;
 
 use Getopt::Long;
 
-sub process_file {
+sub process_file
+{
     my $layout_html = shift;
     my $content_dir = shift;
     my $output_dir = shift;
@@ -16,9 +17,12 @@ sub process_file {
     my $content;
     my $outfile;
 
-    open($layout, $layout_html) or die("Could not open $layout_html for reading: $!");
-    open($content, $content_dir . $content_file) or die("Could not open $content_file for reading: $!");
-    open($outfile, '>', $output_dir . $content_file) or die("Could not open $outfile for writing: $!");
+    open($layout, $layout_html)
+	or die("Could not open $layout_html for reading: $!");
+    open($content, $content_dir . $content_file)
+	or die("Could not open $content_file for reading: $!");
+    open($outfile, '>', $output_dir . $content_file)
+	or die("Could not open $outfile for writing: $!");
 
     while (<$layout>) {
 	my $content_tag;
@@ -39,7 +43,8 @@ sub process_file {
     }
 }
 
-sub process_content {
+sub process_content
+{
 
     my (%options) = @_;
 
@@ -52,12 +57,16 @@ sub process_content {
     my $sitemap;
     my @content_files;
 
-    opendir(my $content, "$content_dir") or die("Can't open content directory $content_dir: $!");
+    opendir(my $content, "$content_dir")
+	or die("Can't open content directory $content_dir: $!");
+
     @content_files = readdir($content);
     closedir($content);
 
 
-    open($sitemap, $sitemap_file) or die("Can't open sitemap file $sitemap_file: $!");
+    open($sitemap, $sitemap_file)
+	or die("Can't open sitemap file $sitemap_file: $!");
+
     $navigation = "<ul>\n";
     while (<$sitemap>) {
 	my $file;
@@ -75,13 +84,16 @@ sub process_content {
 
     foreach $content_file (@content_files) {
 	next if $content_file eq ".." || $content_file eq ".";
+	next if $content_file eq "pictures";
 
 	print "Processing $content_file\n";
-	process_file($layout_html, $content_dir, $output_dir, $content_file, $navigation);
+	process_file($layout_html, $content_dir,
+		     $output_dir, $content_file, $navigation);
     }
 }
 
-sub usage {
+sub usage
+{
     print "$0 <layout> <content> <output> <sitemap>\n";
     print "\t--layout-html <layout>\n";
     print "\t--content-dir <content>\n";
